@@ -15,7 +15,7 @@ export default function VideoRecorder() {
     reset,
   } = useVideoRecorder();
 
-  // Auto-play local preview when it becomes available
+  //Auto-play local preview when it becomes available
   const previewRef = useRef(null);
   useEffect(() => {
     if (previewRef.current && localPreviewUrl) {
@@ -40,15 +40,15 @@ export default function VideoRecorder() {
     <div style={styles.container}>
       <h1 style={styles.title}>Web Video Recorder</h1>
 
-      {/* ── Status badge ───────────────────────────────────────────────── */}
+      {/*Status badge*/}
       <div style={{ ...styles.badge, ...statusColor(status) }}>
         {statusLabel(status)}
       </div>
 
-      {/* ── Error message ──────────────────────────────────────────────── */}
+      {/*Error message*/}
       {errorMsg && <p style={styles.error}>{errorMsg}</p>}
 
-      {/* ── Live camera preview ────────────────────────────────────────── */}
+      {/*Live camera preview*/}
       {(status === "previewing" || status === "recording") && (
         <div style={styles.videoWrapper}>
           {status === "recording" && <div style={styles.recDot} title="Recording" />}
@@ -61,7 +61,7 @@ export default function VideoRecorder() {
         </div>
       )}
 
-      {/* ── Playback preview of recorded video ────────────────────────── */}
+      {/*Playback preview of recorded video*/}
       {localPreviewUrl && (status === "uploading" || status === "done") && (
         <div style={styles.section}>
           <h3 style={styles.sectionTitle}>Recorded Video Preview</h3>
@@ -74,15 +74,15 @@ export default function VideoRecorder() {
         </div>
       )}
 
-      {/* ── Upload progress ────────────────────────────────────────────── */}
+      {/*Upload progress*/}
       {status === "uploading" && (
-        <p style={styles.info}>⏳ Finalizing on server… {uploadProgress}</p>
+        <p style={styles.info}> Finalizing on server… {uploadProgress}</p>
       )}
       {status === "recording" && uploadProgress && (
-        <p style={styles.info}>📡 {uploadProgress}</p>
+        <p style={styles.info}> {uploadProgress}</p>
       )}
 
-      {/* ── Download section ───────────────────────────────────────────── */}
+      {/*Download section*/}
       {downloadInfo && status === "done" && (
         <div style={styles.section}>
           <h3 style={styles.sectionTitle}>
@@ -102,7 +102,7 @@ export default function VideoRecorder() {
         </div>
       )}
 
-      {/* ── Controls ──────────────────────────────────────────────────── */}
+      {/*Controls*/}
       <div style={styles.controls}>
         {status === "idle" && (
           <button style={styles.btn} onClick={requestCamera}>
@@ -138,8 +138,7 @@ export default function VideoRecorder() {
   );
 }
 
-// ── Helpers ─────────────────────────────────────────────────────────────────
-
+//Helpers 
 function statusLabel(s) {
   return {
     idle:       "Idle",
@@ -165,7 +164,7 @@ function statusColor(s) {
   return map[s] || {};
 }
 
-// ── Styles (plain objects — no styling library needed) ───────────────────────
+//Styles
 const styles = {
   container: {
     maxWidth: 700,

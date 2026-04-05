@@ -117,7 +117,7 @@ export function useVideoRecorder() {
       const index = bufferRef.current.addChunk(event.data);
       try {
         await videoApi.uploadChunk(sessionId, index, event.data);
-        setUploadProgress(`${index + 1} chunk(s) uploaded...`);
+        console.log(`${index + 1} chunk uploaded`);
       } catch (err) {
         console.warn("Chunk upload failed:", err.message);
       }
