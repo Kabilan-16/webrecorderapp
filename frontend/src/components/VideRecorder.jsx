@@ -24,7 +24,6 @@ export default function VideoRecorder() {
   }, [localPreviewUrl]);
 
   const didAutoRequestRef = useRef(false);
-
   useEffect(() => {
     if (didAutoRequestRef.current || status !== "idle") return;
     didAutoRequestRef.current = true;
@@ -146,9 +145,9 @@ function statusLabel(s) {
     idle:       "Idle",
     requesting: "Requesting camera…",
     previewing: "Camera ready",
-    recording:  "● Recording",
+    recording:  "Recording",
     uploading:  "Saving to server…",
-    done:       "Done ✓",
+    done:       "Done",
     error:      "Error",
   }[s] || s;
 }

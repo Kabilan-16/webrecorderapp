@@ -85,16 +85,6 @@ export class VideoApi {
         return data;
     }
 
-    //List the previous recording sessions
-    async listvideos(){
-        const data=await this._requestJson("/api/videos");
-        const videos=Array.isArray(data?.videos)? data.videos: [];
-        return videos.map((video)=>({
-            ...video,
-            previewUrl: `${this.baseUrl}${video.previewUrl}`,
-            downloadUrl: `${this.baseUrl}${video.downloadUrl}`,
-        }));
-    }
 }
 
 export const videoApi = new VideoApi();    

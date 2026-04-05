@@ -164,43 +164,6 @@ app.get("/api/videos/:filename/download",(req,res)=>{
     }
 });
 
-//Check current session status
-app.get("/api/sessions/:sessionId/status",(req,res)=>{
-    try{
-        const session = sessions[req.params.sessionId];
-        if (!session) {
-            return res.status(404).json({error:"Session not found"});
-        }
-        return res.json(session);
-    }catch(err){
-        console.error("Error checking session status:",err);
-        return res.status(500).json({error:"Failed to check session status"});
-    }
-});
-
-//List all the finalized videos
-app.get("/api/videos",(req,res)=>{
-    try{
-        const files = fs.readdirSync(UPLOAD_DIR)
-            .filter((f)=>f.endsWith('.webm'))
-            .map((f)=>{
-                const stats = fs.statSync(path.join(UPLOAD_DIR, f));
-                return {
-                    filename: f,
-                    previewUrl: `/videos/${f}`,
-                    downloadUrl: `/api/videos/${encodeURIComponent(f)}/download`,
-                    sizeBytes: stats.size,
-                    createdAt: stats.birthtime.toISOString(),
-                };
-            })
-            .sort((a,b)=>new Date(b.createdAt) - new Date(a.createdAt));
-        return res.json({videos:files});
-    }catch(err){
-        console.error("Error listing videos:",err);
-        return res.status(500).json({error:"Failed to list videos"});
-    }
-});
-
 
 app.listen(PORT,()=>{
     console.log (`backend server running on https://localhost:${PORT}`);
