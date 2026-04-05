@@ -84,7 +84,6 @@ export class VideoApi {
         }
         return data;
     }
-
 }
 
 export const videoApi = new VideoApi();    
