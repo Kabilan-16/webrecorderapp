@@ -122,7 +122,7 @@ app.post("/api/sessions/:sessionId/finalize",(req,res)=>{
                     previewUrl:`/videos/${outputFilename}`,
                     downloadUrl:`/api/videos/${encodeURIComponent(outputFilename)}/download`,
                     filename: outputFilename,
-                    size: stats.size,
+                    sizeBytes: stats.size,
                 });
             }
             catch(err){
